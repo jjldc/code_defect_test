@@ -1,6 +1,6 @@
 /*
- 瓒婄晫璁块棶1
-    鍏ㄥ眬鍙橀噺鏁扮粍锛屽姩鎬佺储寮曡繍琛屾椂瓒婄晫
+ 越界访问1
+    全局变量数组，动态索引运行时越界
 */
 int g_array_100[100];
 void out_of_bound_test_1(void)
@@ -11,8 +11,8 @@ void out_of_bound_test_1(void)
 }
 
 /*
- 瓒婄晫璁块棶2
-    鏍堝唴灞�閮ㄥ彉閲忥紝鍔ㄦ�佺储寮曡繍琛屾椂瓒婄晫
+ 越界访问2
+    栈内局部变量，动态索引运行时越界
 */
 void out_of_bound_test_2(void)
 {
@@ -27,17 +27,17 @@ void out_of_bound_test_2(void)
 
 
 /*
- 瓒婄晫璁块棶3
-    鍑芥暟鍐呯敵璇峰姩鎬佸唴瀛橈紝瓒婄晫璁块棶
+ 越界访问3
+    函数内申请动态内存，越界访问
 */
 void out_of_bound_test_3(void)
 {
-    char *a = (char *)malloc(100);
-    if (a == NULL)
+    char *heap_mem_100 = (char *)malloc(100);
+    if (heap_mem_100 == NULL)
         return;
 
     for (int i = 0; i < 103; i++)
-        a[i] = i;
+        heap_mem_100[i] = i;
     return;
 }
 
