@@ -43,7 +43,7 @@ void out_of_bound_test_3(void)
 
 
 /*
- 越界访问4
+ 越界访问4  gitee不识别，cppcheck不识别
     在A函数内申请动态内存，B函数内根据参数越界访问
 */
 char *g_array_50 = NULL;
@@ -65,7 +65,8 @@ void out_of_bound_test_4(void)
     g_array_50[100] = 1;
     // 通过函数参数访问50字节数组
     res = get_array_member(0);
-    res = get_array_member(100);
+    res += get_array_member(100);   // value overflow
+    printf("%d\n", (int)res);
     return;
 }
 
