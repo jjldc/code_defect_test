@@ -42,7 +42,32 @@ void out_of_bound_test_3(void)
 }
 
 
+/*
+ 越界访问4
+    在A函数内申请动态内存，B函数内根据参数越界访问
+*/
+char *g_array_50 = NULL;
+char *alloc_g_array_50(void)
+{
+    return (char *)malloc(50);
+}
 
+char get_array_member(int idx)
+{
+    return g_array_50[idx];
+}
+
+void out_of_bound_test_4(void)
+{
+    char res;
+    g_array_50 = alloc_g_array_50();
+    // 越界访问在A函数中申请的50字节数组
+    g_array_50[100] = 1;
+    // 通过函数参数访问50字节数组
+    res = get_array_member(0);
+    res = get_array_member(100);
+    return;
+}
 
 /******************/
 void out_of_bound_test(void)
@@ -50,4 +75,5 @@ void out_of_bound_test(void)
     out_of_bound_test_1();
     out_of_bound_test_2();
     out_of_bound_test_3();
+    out_of_bound_test_4();
 }
