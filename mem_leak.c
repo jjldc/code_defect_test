@@ -26,7 +26,7 @@ char *test_memleak_2_alloc_ptr(int size)
 {
     char *a;
     a = (char *)malloc(size);
-    if (a != NULL)
+    if (a == NULL)
         return NULL;
     return a;
 }
